@@ -1,0 +1,68 @@
+﻿@using System.Data;
+@using System.Drawing
+@using Cinema;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Model1 data = new Model1();
+
+}
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        @{
+            for (int i = 0; i < data.Movie.Count(); i++)
+            {
+                if (i == 0)
+                {
+                    <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
+                }
+                else
+                {
+                    <li data-target="#myCarousel" data-slide-to="@i"></li>
+                }
+
+            }
+        }
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+        @{
+
+            foreach (var item in data.Movie)
+            {
+                string @base64String = Convert.ToBase64String(item.Img);
+                if (item.Movie_Id == 14)
+                {
+                    Html.Encode("<div class=\"item active\">");
+                }
+                else
+                {
+                    <div class=item>
+                }
+                    
+                @<img src="@String.Format("data:image/png;base64,{0}", @base64String)" alt=@item.Name , style="width: 30%"/>
+                    <div class="carousel-caption">
+                        <h3>@item.Name</h3>
+                    </div>
+                </div>
+
+            }
+        }
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
